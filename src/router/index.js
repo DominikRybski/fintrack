@@ -1,7 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-
-const Dashboard = { template: '<div><h2>Dashboard</h2><p>Tutaj będzie lista transakcji.</p></div>' }
-const Stats = { template: '<div><h2>Statystyki</h2><p>Tutaj będą wykresy.</p></div>' }
+import Dashboard from '@/views/Dashboard.vue'
+import Stats from '@/views/Stats.vue'
 
 export default createRouter({
   history: createWebHashHistory(),
