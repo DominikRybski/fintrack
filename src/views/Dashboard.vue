@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import { useTransactionsStore } from '@/stores/transactions'
 import BalanceSummary from '@/components/BalanceSummary.vue'
 import FilterBar from '@/components/FilterBar.vue'
@@ -11,7 +11,10 @@ const editingTransaction = ref(null)
 
 onMounted(() => store.load())
 
-function handleEdit(t) { editingTransaction.value = t }
+function handleEdit(t) {
+  editingTransaction.value = t
+  nextTick(() => document.querySelector('.transaction-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+}
 function handleDone() { editingTransaction.value = null }
 </script>
 
