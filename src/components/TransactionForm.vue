@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useTransactionsStore, CATEGORIES } from '@/stores/transactions'
 
 const store = useTransactionsStore()
@@ -20,6 +20,16 @@ const form = ref({
 
 const errors = ref({})
 const saving = ref(false)
+
+watch(
+  () => props.editing,
+  (val) => {
+    errors.value = {}
+    form.value = val
+      ? { name: val.name ?? '', amount: val.amount ?? '', type: val.type ?? 'expense', category: val.category ?? '', date: val.date ?? new Date().toISOString().slice(0, 10), note: val.note ?? '' }
+      : { name: '', amount: '', type: 'expense', category: '', date: new Date().toISOString().slice(0, 10), note: '' }
+  },
+)
 
 function validate() {
   const e = {}
